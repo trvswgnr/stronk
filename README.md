@@ -16,7 +16,7 @@ Stronk types are created using the `type` base object:
 import { type } from "stronk-ts";
 ```
 
-`type` exposes a the following methods:
+`type` exposes the following methods:
 
 -   `create` - creates a new type
 -   `is` - checks if a value is of a type
@@ -60,7 +60,7 @@ type.of("hello world"); // string
 
 ### `no-typeof`
 
-`no-typeof` disallows the use of `typeof` to check the type of a value. Instead, use `type.is`:
+`no-typeof` disallows the use of `typeof` to check the type of a value. Instead, use `type.of`:
 
 ```ts
 // bad

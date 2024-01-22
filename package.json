@@ -5,7 +5,9 @@
     "private": true,
     "scripts": {
         "build": "cd packages/stronk-ts && bun run build",
-        "release": "cd packages/stronk-ts && bun run release && cd ../eslint-plugin-stronk-ts && bun run release"
+        "release": "npm run release:plugin && npm run release:main",
+        "release:plugin": "cd packages/eslint-plugin-stronk-ts && bun run release",
+        "release:main": "cd packages/stronk-ts && bun run release"
     },
     "devDependencies": {
         "@types/bun": "latest",

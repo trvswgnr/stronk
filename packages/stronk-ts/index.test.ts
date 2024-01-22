@@ -81,16 +81,11 @@ function create<const T extends string, const C extends AnyFn>(
 ): CustomType<T, C> {
     return Object.assign(
         (...args: any[]) => {
-            if (typeof constructorMethod === "function") {
-                const primitive = constructorMethod(...args);
-                return Object.assign(primitive, { [TYPE]: name });
-            }
-            return { [TYPE]: name };
+            const base = constructorMethod(...args);
+            return Object.assign(base, { [TYPE]: name });
         },
         {
-            from: (x: any) => {
-                return Object.assign(x, { [TYPE]: name });
-            },
+            from: (x: any) => Object.assign(x, { [TYPE]: name }),
             [BASE]: name,
         },
     );
@@ -141,6 +136,7 @@ const PRIMITIVE_TYPES = {
     symbol: Symbol,
     bigint: BigInt,
 } as const;
+
 type PrimitiveType = keyof typeof PRIMITIVE_TYPES;
 type PrimitiveWrapper = {
     [K in PrimitiveType]: (typeof PRIMITIVE_TYPES)[K];

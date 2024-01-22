@@ -1,10 +1,5 @@
 {
     "name": "eslint-plugin-stronk-ts",
     "version": "0.0.1",
-    "main": "index.js",
-    "private": true,
-    "devDependencies": {
-        "@types/eslint": "^8.56.2"
-    },
-    "peerDependencies": {}
+    "main": "index.js"
 }

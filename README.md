@@ -1,3 +1,6 @@
+![image](https://github.com/trvswgnr/stronk/assets/8974888/7469ab00-9532-4851-987f-8ecde9ca7972)
+
+
 # stronk
 
 `stronk` drastically improves the way you create and work with types. It introduces a way to create stronger, nominally typed systems, effectively enhancing JavaScript's typing capabilities. This library allows for runtime type checks, making it a powerful tool for developers who need precise, runtime-validatable branded types.

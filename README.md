@@ -1,6 +1,10 @@
 # stronk
 
-an easy way to make stronger types in typescript + an eslint plugin to enforce them
+`stronk` drastically improves the way you create and work with types. It introduces a way to create stronger, nominally typed systems, effectively enhancing JavaScript's typing capabilities. This library allows for runtime type checks, making it a powerful tool for developers who need precise, runtime-validatable branded types.
+
+## Motivation
+
+TypeScript's structural type system is fine, but it falls short in scenarios where nominal typing is needed. Types in TypeScript are not checkable at runtime. `stronk` fills this gap by enabling developers to define types that are both nominally distinct and runtime-checkable, improving code safety and robustness.
 
 ## Installation
 
@@ -10,57 +14,41 @@ npm install stronk-ts
 
 ## Usage
 
-Stronk types are created using the `type` base object:
+### Creating Branded Types
 
 ```ts
 import { type } from "stronk-ts";
-```
 
-`type` exposes a the following methods:
-
--   `create` - creates a new type
--   `is` - checks if a value is of a type
--   `of` - gets the type of a value
-
-### `create`
-
-`create` takes a type definition and returns a new type:
-
-```ts
 const BrandedString = type.create("BrandedString", String);
 const myString = BrandedString("hello world");
 ```
 
-### `is`
-
-`is` takes a type and a value and returns a boolean indicating whether the value is of the type:
+### Runtime Type Checking
 
 ```ts
-const BrandedString = type.create("BrandedString", String);
-const myString = BrandedString("hello world");
-
 type.is(myString, BrandedString); // true
 type.is("hello world", BrandedString); // false
-type.is(myString, String); // true
+type.is(myString, String); // narrows `myString` to type `string`
 ```
 
-### `of`
-
-`of` takes a value and returns its type:
+### Specific Type Retrieval
 
 ```ts
-const BrandedString = type.create("BrandedString", String);
-const myString = BrandedString("hello world");
-
 type.of(myString); // "BrandedString"
-type.of("hello world"); // string
+type.of("hello world"); // "string"
 ```
 
-## Rules
+## Key Features
+
+- **Nominal Typing**: Introduces nominal typing to TypeScript, making your types distinct beyond structural similarities.
+- **Runtime Type Checks**: `type.is` allows you to check and narrow types at runtime, ensuring type safety beyond compile time.
+- **Enhanced Type Identification**: `type.of` returns specific types, providing more detailed type information than the standard `typeof`.
+
+## ESLint Plugin Rules
 
 ### `no-typeof`
 
-`no-typeof` disallows the use of `typeof` to check the type of a value. Instead, use `type.is`:
+Disallows the use of `typeof` for type checking. Use `type.is` instead.
 
 ```ts
 // bad
@@ -72,8 +60,7 @@ const stringType = type.of("hello world");
 
 ### `no-typeof-comparison`
 
-`no-typeof-comparison` disallows the use of `typeof` to check the type of a value in a comparison.
-Instead, use `type.is`:
+Prevents `typeof` comparisons. Use `type.is` for comparisons.
 
 ```ts
 // bad
@@ -86,3 +73,15 @@ if (type.is("hello world", String)) {
     // ...
 }
 ```
+
+## Contributing
+
+Contributions are welcome! Create an issue or open a pull request if there's something you'd like to be different.
+
+## Roadmap
+
+The goal is to continuously evolve `stronk`, adding more features and capabilities to enhance the type system.
+
+## License
+
+`stronk` is available under [the MIT license](LICENSE).
